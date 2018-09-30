@@ -2,6 +2,10 @@ Roomm8
 --
 This app is to manage and formalize roommates interactions. 
 
+Progress
+--
+[Scrum Board](https://trello.com/b/FaETswJe/roomm8)
+
 Run It 
 --
 1. `npm install`
