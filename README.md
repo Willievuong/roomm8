@@ -6,11 +6,17 @@ Progress
 --
 [Scrum Board](https://trello.com/b/FaETswJe/roomm8)
 
-Run It 
+Installation Guide
 --
 1. `npm install`
-2. `npm start` 
-3. Run `http://localhost:3000/`
+2. `npm run client-install` 
+
+
+Run Guide
+--
+1. `npm run dev`
+2. Access `http://localhost:3000/`
+
 
 Credits
 -- 

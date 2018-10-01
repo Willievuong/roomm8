@@ -1,26 +1,30 @@
 {
   "name": "roomm8",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.4",
-    "@fortawesome/free-solid-svg-icons": "^5.3.1",
-    "@fortawesome/react-fontawesome": "^0.1.3",
-    "@material-ui/core": "^3.1.1",
-    "express": "^4.16.3",
-    "mongodb": "^3.1.3",
-    "react": "^16.4.2",
-    "react-burger-menu": "^2.5.3",
-    "react-dom": "^16.4.2",
-    "react-router-dom": "^4.3.1"
-  },
-  "devDependencies": {
-    "react-scripts": "1.1.5"
-  },
+  "version": "1.0.0",
+  "description": "Roomm8 -- This app is to manage and formalize roommates interactions.",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willievuong/roomm8.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willievuong/roomm8/issues"
+  },
+  "homepage": "https://github.com/willievuong/roomm8#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.3.0"
   }
 }
