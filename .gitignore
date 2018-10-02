@@ -9,6 +9,10 @@
 # production
 /build
 
+package-lock.json
+
+config/config.js
+
 # misc
 .DS_Store
 .env.local
