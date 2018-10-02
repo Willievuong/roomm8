@@ -11,3 +11,4 @@ const app = express();
 // Bodyparser Middleware
 app.use(bodyParser.json());
 
+// Db config  
