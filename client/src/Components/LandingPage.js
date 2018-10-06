@@ -4,8 +4,8 @@ class LandingPage extends Component {
   render(){
     return(
       <div>
-
-      </div>
+        <img src="landingImg.jpg"/>
+        </div>
     );
   }
 }
