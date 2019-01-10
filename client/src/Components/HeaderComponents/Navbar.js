@@ -5,9 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -17,6 +14,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Link } from "react-router-dom";
 import '../css/navbar.css'
 
 const styles = {
@@ -25,10 +23,6 @@ const styles = {
   },
   grow: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
   },
 };
 
@@ -63,8 +57,10 @@ class ButtonAppBar extends Component {
         <List>
           {['Home', 'Family', 'Contacts', 'Maintainence'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{<MailIcon/>}</ListItemIcon>
+              <Link to={"/" + text} className="menuButton">
               <ListItemText primary={text} />
+              </Link>
             </ListItem>
           ))}
         </List>
@@ -72,8 +68,10 @@ class ButtonAppBar extends Component {
         <List>
           {['All Notification', 'Tickets', 'Logout'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{<MailIcon/>}</ListItemIcon>
+              <Link to={"/" + text} className="menuButton">
               <ListItemText primary={text} />
+              </Link>
             </ListItem>
           ))}
         </List>
