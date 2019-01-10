@@ -9,6 +9,7 @@
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
     "server": "nodemon server.js",
+    "installAll": "concurrently \"npm install\" \"npm run \"client-install\"",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
