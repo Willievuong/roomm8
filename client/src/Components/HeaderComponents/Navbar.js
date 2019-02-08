@@ -80,7 +80,7 @@ class ButtonAppBar extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="secondary">
+        <AppBar position="static" color="primary">
           <Toolbar>
             <Button className={classes.menuButton} onClick={this.toggleDrawer('left', true)}  color="inherit" >
               <MenuIcon 

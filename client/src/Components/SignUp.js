@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   root: {
@@ -13,20 +16,55 @@ const styles = theme => ({
 });
 
 class SignUp extends Component {
+  state = {
+    name: 'name goes here',
+  }
   render(){
     const { classes } = this.props;
 
     return(
-      <div>
-        <Paper className={classes.root} elevation={1}>
-          <Typography variant="h5" component="h3">
-            This is a sheet of paper.
-          </Typography>
-          <Typography component="p">
-            Paper can be used to build surface or other elements for your application.
-          </Typography>
-        </Paper>
-      </div>
+      <Grid container
+            spacing={0} 
+            justify="center" 
+            alignItems="center"
+        >
+        <Grid item>
+          <Paper>
+            <Grid container 
+                  spacing={0}
+                  justify="center"
+                  alignItems="center"
+                  direction="column"
+              >
+              <form noValidate autoComplete="off">
+                <Grid item>
+                  <TextField
+                    required
+                    id="outlined-name"
+                    label="Name"
+                    className={classes.textField}
+                    value={this.state.name}
+                  // onChange={this.handleChange('name')}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    required
+                    id="outlined-email"
+                    label="Required"
+                    defaultValue="user@something.com"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                  />   
+                </Grid> 
+              </form>
+            </Grid>
+          </Paper>
+        </Grid>
+      </Grid>
     );
   }
 }
