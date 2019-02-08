@@ -12,6 +12,7 @@
 package-lock.json
 
 /config/config.js
+/config
 
 # misc
 .DS_Store
