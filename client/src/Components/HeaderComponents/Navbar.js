@@ -50,7 +50,7 @@ class ButtonAppBar extends Component {
 
   render(){
     const { classes } = this.props;
-    const{  anchorEl }= this.state;
+    const { anchorEl }= this.state;
 
     const sideList = (
       <div className={classes.list}>
