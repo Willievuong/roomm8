@@ -8,15 +8,30 @@ Progress
 
 Installation Guide
 --
-1. `npm install`
-2. `npm run client-install` 
+Client
+1. Navigate to Client Folder
+2. `npm run install`
+
+Server
+1. Navigate to Backend Folder
+2. Update or Replace Environmental Variable 
+3. Install MySQL if haven't 
 
 
 Run Guide
 --
-1. `npm run dev`
-2. Access `http://localhost:3000/`
+Client
+1. Navigate to Client Folder 
+2. `npm run`
 
+Server
+1. Navigate to Backend Folder
+2. `py main.py`
+
+Built with
+--
+Front End - React.js and Material UI 
+Back End - Flask and Mysql 
 
 Credits
 -- 
