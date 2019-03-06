@@ -15,18 +15,45 @@ mysql = MySQL(app)
 
 app.route('/login', methods=['POST'])
 def login():
-
-  return 0
-
-app.route('/logout', methods=['GET'])
-def logout():
-
-  return 0
+  cur = mysql.connection.cursor()
+  email = request.form.get('email')
+  password = request.form.get('password')
+  select_stmt = "SELECT * FROM Users where Email=%(email)s AND Password=%(password)s"
+  cur.execute(select_stmt, {'email': email, 'password': password})
+  rv = list(cur.fetchall())
+  if(len(rv) == 0):
+    abort(404) # Return error message since profile is not found 
+  else: 
+     for row in range(len(rv)):
+        profile  = {
+          "id": int(rv[row]['userID']),
+          "firstName": str(rv[row]['firstName']),
+          "lastName": str(rv[row]['lastName']),
+          "email": str(rv[row]['email']),
+          "description": str(rv[row]['description']),
+          "lastActive": str(rv[row]['lastActive']),
+          "location": str(rv[row]['location'])
+        }
+      
+  return json.dumps(profile)
 
 app.route('/profile/<userID>', methods=['GET'])
 def users(userID):
+  cur = mysql.connection.cursor()
+  select_stmt = "SELECT * FROM users where userid=%(userID)s"
+  cur.execute(select_stmt, {'userID' : userID})    
+  rv = list(cur.fetchall())
+  profile  = {
+    "id": int(rv[0]['userID']),
+    "firstName": str(rv[0]['firstName']),
+    "lastName": str(rv[0]['lastName']),
+    "email": str(rv[0]['email']),
+    "description": str(rv[0]['description']),
+    "lastActive": str(rv[0]['lastActive']),
+    "location": str(rv[0]['location'])
+  }
 
-  return 0
+  return json.dumps(profile)
 
 app.route('/family/<familyID>', methods=['GET'])
 def family(familyID):
