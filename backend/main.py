@@ -56,9 +56,19 @@ def users(userID):
   return json.dumps(profile)
 
 app.route('/family/<familyID>', methods=['GET'])
-def family(familyID):
 
-  return 0
+def family(familyID):
+  cur = mysql.connection.cursor()
+  select_stmt = "SELECT * FROM family where familyID=%(familyID)s"
+  cur.execute(select_stmt, {'familyID' : familyID})    
+  rv = list(cur.fetchall())
+  profile  = {
+    "id": int(rv[0]['familyID']),
+    "familyName": str(rv[0]['familyName']),
+    "size": str(rv[0]['familySize'])
+  }
+
+  return json.dumps(profile)
 
 app.route('/addUser', methods=['POST'])
 def addUser():
