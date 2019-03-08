@@ -70,10 +70,27 @@ def family(familyID):
 
   return json.dumps(profile)
 
-app.route('/addUser', methods=['POST'])
-def addUser():
+app.route('/signUp', methods=['POST'])
+def signUp():
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT * FROM users''')
+    rv = list(cur.fetchall())
+    newID = len(rv) + 1
+    profile  = {
+        "id": newID,
+        "firstName": request.form['firstName'],
+        "lastName": request.form['lastName'],
+        "email": request.form['email'],
+        "password": request.form['password'],
+        "location": request.form['location'],
+        "description": request.form['description'],
+        "lastActive": 0
+    }
 
-  return 0
+    select_stmt = "insert into Users (userID,firstName,lastName,email,password,location,Description,LastActive) values (%(id)s,%(firstName)s,%(lastName)s,%(email)s,%(password)s,%(location)s,%(description)s,%(lastActive)s)"
+    cur.execute(select_stmt, profile)
+    mysql.connection.commit()
+    return "Success"
 
 app.route('/deleteUser', methods=['POST'])
 def delUser():
@@ -87,6 +104,16 @@ def addFamily():
 
 app.route('/deleteFamily', methods=['POST'])
 def delFamily():
+
+  return 0
+
+app.route('/ticket/<ticketID>', methods=['GET'])
+def getTicket():
+
+  return 0
+
+app.route('/deleteTicket', methods=['POST'])
+def delTicket():
 
   return 0
 
