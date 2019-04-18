@@ -1,8 +1,10 @@
-from flask import Flask, abort, request
-from flask_mysqldb import MySQL
 import os 
 import datetime 
 import json 
+from flask import Flask, abort, request
+from flask_mysqldb import MySQL
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
 
@@ -10,6 +12,7 @@ app.config['MYSQL_USER'] = os.environ.get('DB_USER')
 app.config['MYSQL_PASSWORD'] = os.environ.get('DB_PASS')
 app.config['MYSQL_DB'] = 'roomm8'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+db = SQLAlchemy(app)
 
 mysql = MySQL(app)
 
@@ -24,16 +27,16 @@ def login():
   if(len(rv) == 0):
     abort(404) # Return error message since profile is not found 
   else: 
-     for row in range(len(rv)):
-        profile  = {
-          "id": int(rv[row]['userID']),
-          "firstName": str(rv[row]['firstName']),
-          "lastName": str(rv[row]['lastName']),
-          "email": str(rv[row]['email']),
-          "description": str(rv[row]['description']),
-          "lastActive": str(rv[row]['lastActive']),
-          "location": str(rv[row]['location'])
-        }
+    for row in range(len(rv)):
+      profile = {
+        "id": int(rv[row]['userID']),
+        "firstName": str(rv[row]['firstName']),
+        "lastName": str(rv[row]['lastName']),
+        "email": str(rv[row]['email']),
+        "description": str(rv[row]['description']),
+        "lastActive": str(rv[row]['lastActive']),
+        "location": str(rv[row]['location'])
+      }
       
   return json.dumps(profile)
 
@@ -93,32 +96,32 @@ def signUp():
     return "Success"
 
 app.route('/deleteUser', methods=['POST'])
-def delUser():
+def del_User():
 
   return 0
 
 app.route('/addFamily', methods=['POST'])
-def addFamily():
+def add_Family():
 
   return 0
 
 app.route('/deleteFamily', methods=['POST'])
-def delFamily():
+def del_Family():
 
   return 0
 
 app.route('/ticket/<ticketID>', methods=['GET'])
-def getTicket():
+def get_Ticket():
 
   return 0
 
 app.route('/deleteTicket', methods=['POST'])
-def delTicket():
+def del_Ticket():
 
   return 0
 
 app.route('/submitTicket', method=['POST'])
-def submitTicket():
+def submit_Ticket():
 
   return 0
 
