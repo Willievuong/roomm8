@@ -1,6 +1,6 @@
-import sys
 from app import db
-sys.path.insert(0, '../')
+from sqlalchemy.dialects.postgresql import JSON
+# sys.path.insert(0, '../')
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -4,6 +4,8 @@ __pycache__/
 env/
 bin/
 
+.vscode
+
 # dependencies
 /node_modules
 

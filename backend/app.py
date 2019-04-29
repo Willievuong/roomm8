@@ -5,7 +5,6 @@ from flask import Flask, abort, request
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__)
 
 app.config['MYSQL_USER'] = os.environ.get('DB_USER')
