@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
-from django.contrib.auth.models import AbstractUser
 
 
 class Profile(models.Model):
@@ -31,4 +29,7 @@ class Task(models.Model):
 class Room(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.TextField()
+
+    def __str(self):
+        return "{}".format(self)
 
