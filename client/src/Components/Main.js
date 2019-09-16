@@ -12,8 +12,8 @@ class Main extends Component {
           <Switch>
             <Route exact path='/' component={LandingPage}/>
             <Route exact path='/Home' component={LandingPage}/>
-            <Route path='/SignUp' component={SignUp}/>
-            <Route path='/Login' component={Login}/>
+            {/* <Route path='/SignUp' component={SignUp}/>
+            <Route path='/Login' component={Login}/> */}
             <Route path='*' component={ErrorPage}/>
           </Switch>
       </main>

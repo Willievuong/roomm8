@@ -82,7 +82,7 @@ class ButtonAppBar extends Component {
       <div className={classes.root}>
         <AppBar position="static" color="secondary">
           <Toolbar>
-            <Button className={classes.menuButton} onClick={this.toggleDrawer('left', true)}  color="inherit" >
+            {/* <Button className={classes.menuButton} onClick={this.toggleDrawer('left', true)}  color="inherit" >
               <MenuIcon 
                 aria-owns={anchorEl ? 'menu' : null}
                 aria-haspopup="true"
@@ -96,7 +96,7 @@ class ButtonAppBar extends Component {
               >
                 {sideList}
               </div>
-            </Drawer>
+            </Drawer> */}
             <Typography variant="title" color="inherit" className={classes.grow}>
               Room8
             </Typography>

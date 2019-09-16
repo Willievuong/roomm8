@@ -1,8 +1,12 @@
 .landing{
-  
+  padding: 10px;
 }
 
 .resize{
   max-width: 100%;
   object-fit: cover;
+}
+
+.paper{
+  padding: 10px; 
 }

@@ -1,22 +1,38 @@
 import React, { Component } from 'react';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import './css/landing.css'
 
-const styles = { 
-    backgroundimage: 'url(' + './img/landingImg.jpg' + ')',
-}
 
-
-class LandingPage extends Component {
+class LandingPage extends Component { 
   render(){
 
- 
     return(
       <div className="landing">
-        <div>
-        {/* <img className="resize" src="https://scontent-lax3-1.xx.fbcdn.net/v/t31.0-8/11147036_10205517776556625_7835453895223036022_o.jpg?_nc_cat=105&oh=886ef2c6a92d4fd1c1c1339e2b17004f&oe=5C5E3D34"/>
-         */}
-         
-        </div>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper> 
+              <Typography variant="h5" component="h3">
+                Kitchen
+              </Typography>
+              <Typography component="p">
+                Paper can be used to build surface or other elements for your application.
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper> 
+              Janet
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper> 
+              <Button variant="contained" color="primary"> Submit </Button>
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
     );
   }
