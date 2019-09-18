@@ -3,11 +3,11 @@ import FacebookLogin from 'react-facebook-login'
 
 const axios = require('axios');
 axios.defaults.headers.post['Content-Type'] = 'application/JSON';
-const backendRoutes = 'http://localhost:5000/'
+// const backendRoutes = 'http://localhost:5000/'
 
-const styles = {
+// const styles = {
 
-}
+// }
 
 class Login extends Component {
   
