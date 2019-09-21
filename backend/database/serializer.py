@@ -10,19 +10,19 @@ class HouseholdSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('id', 'nickname', 'first_name', 'last_name', 'facebook_id', 'date_created')
+        fields = ('id', 'nickname', 'first_name', 'last_name', 'facebook_id', 'date_created', 'household_id', 'pin')
         read_only_fields = ['id']
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        field = ('id', 'room_id', 'start_date', 'end_date', 'user_id', 'user_check_id', 'status')
+        fields = ('id', 'room_id', 'start_date', 'end_date', 'user_id', 'user_check_id', 'status', 'household_id')
         read_only_fields = ['id']
 
 
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        field = ('id', 'name')
+        fields = ('id', 'name', 'household_id')
         read_only_fields = ['id']
 

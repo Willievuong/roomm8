@@ -141,3 +141,34 @@ def RoomDetailsView(request, pk):
     elif request.method == 'DELETE':
         query.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+# Query All User from a specific household 
+@api_view(['GET'])
+def GetUserHousehold(request, household_id):
+    '''
+        Get an list of user ids from a specific household
+    '''
+    
+    try: 
+        queryset = Profile.objects.filter(household_id=household_id)
+    except queryset.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = ProfileSerializer(queryset, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+    
+
+@api_view(['GET'])
+def GetTaskHousehold(request, household_id):
+    '''
+        Get The latest task from a household
+        TODO: Hardcoded to be 4 task for now, need to think of a way to implement it later
+    '''
+    try: 
+        queryset = Task.objects.filter(household_id=household_id)
+    except queryset.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = TaskSerializer(queryset, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

@@ -1,12 +1,29 @@
 import time
 import requests
 
-# Living Room : 0 
-# Kitchen : 1 
-# Hallway Bathroom 2 
-# Corner Bathroom 3 
+# Living Room : 0
+# Kitchen : 1
+# Hallway Bathroom 2
+# Corner Bathroom 3
 
-room = ["Living Room", "Kitchen", "Hallway Bathroom", "Corner Bathroom"]
+room = [
+    {
+        "name": "Living Room",
+        "household_id": 0
+    },
+    {   
+        "name": "Kitchen",
+        "household_id": 0
+    },
+    {
+        "name": "Hallway Bathroom",
+        "household_id": 0
+    },
+    {
+        "name": "Corner Bathroom",
+        "household_id": 0
+    }
+]
 
 BACKEND_URL = "http://localhost:8000/"
 
@@ -17,11 +34,7 @@ def create_room():
 
     print("CREATING ROOM")
     for i in room:
-        data = {
-            "name": i
-        } 
-
-        r = requests.post(BACKEND_URL + "room/", json=data)
+        r = requests.post(BACKEND_URL + "room/", json=i)
         print(r)
 
 task = [
@@ -51,35 +64,42 @@ user = [
     {
         "first_name": "Janet",
         "last_name": "He",
-        "nick_name": "Janet"
+        "nickname": "Janet",
+        'household_id': 0
     }, 
     {   "first_name": "Mohammed",
         "last_name": "Ameen",
-        "nick_name": "Mo"
+        "nickname": "Mo",
+        'household_id': 0
     },
     {
         "first_name": "William",
         "last_name": "Vuong",
-        "nick_name": "Will"
+        "nickname": "Will",
+        'household_id': 0
     },
     {
         "first_name": "Aishwarya",
         "last_name": "Niraula",
-        "nick_name": "Aishwarya"
+        "nickname": "Aishwarya",
+        'household_id': 0
     },
     {
         "first_name": "Humberto",
         "last_name": "Madueno",
-        "nick_name": "Berto"
+        "nickname": "Berto",
+        'household_id': 0
     },
     {
         "first_name": "Sammuel",
         "last_name": "Ayala",
-        "nick_name": "Sammy"
+        "nickname": "Sammy",
+        'household_id': 0
     },
     {   "first_name": "Fermin",
         "last_name": "Vargas",
-        "nick_name": "Fermin"
+        "nickname": "Fermin",
+        'household_id': 0
     }
 ]
 
@@ -92,3 +112,5 @@ def create_user():
     for i in user:
         r = requests.post(BACKEND_URL + "profile/", json=i)
         print(r)
+
+create_room()
