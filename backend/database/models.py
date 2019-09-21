@@ -1,12 +1,23 @@
 from django.db import models
 
 
+class Household(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    name = models.TextField()
+    address = models.TextField()
+    user_size = models.IntegerField(null=True)
+
+    def __str__(self):
+        return "{}".format(self)
+
 class Profile(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
-    facebook_id = models.TextField()
+    facebook_id = models.TextField(null=True)
     first_name = models.TextField()
     last_name = models.TextField()
+    nickname = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
+    household_id = models.TextField(null=True)
 
     def __str__(self):
         return "{}".format(self)
@@ -21,6 +32,7 @@ class Task(models.Model):
     user_id = models.TextField()
     user_check_id = models.TextField(null=True)
     status = models.TextField() 
+    household_id = models.TextField(null=True)
 
     def __str__(self):
         return "{}".format(self)
@@ -29,6 +41,7 @@ class Task(models.Model):
 class Room(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.TextField()
+    household_id = models.TextField(null=True)
 
     def __str(self):
         return "{}".format(self)

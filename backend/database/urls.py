@@ -1,8 +1,13 @@
-from django.conf.urls import url, include 
+from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import (ProfileCreateView, ProfileDetailsView, TaskCreateView, TaskDetailsView, RoomCreateView, RoomDetailsView)
+from .views import (HouseholdCreateView, HouseholdDetailsView,
+                    ProfileCreateView, ProfileDetailsView, 
+                    TaskCreateView, TaskDetailsView, 
+                    RoomCreateView, RoomDetailsView)
 
 urlpatterns = {
+    url(r'^household/$', HouseholdCreateView, name='household'),
+    url(r'^household/(?P<pk>[0-9]+)/$', HouseholdDetailsView, name='household_details'),
     url(r'^profile/$', ProfileCreateView, name="profile"),
     url(r'^profile/(?P<pk>[0-9]+)/$',
         ProfileDetailsView, name="profile_details"),
