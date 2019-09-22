@@ -3,12 +3,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import './css/landing.css'
 const axios = require('axios')
 
-const BACKEND_URL = "http://localhost:8000/"
+const BACKEND_URL = "https://72605858.ngrok.io/"
 
 class LandingPage extends Component { 
   constructor(props){
@@ -17,36 +15,56 @@ class LandingPage extends Component {
       user: {},
       room: {},
       task: {},
+      loaded: false
     }
   }
 
   async loadData(){
-    this.state.user = (await axios.get(BACKEND_URL + "profile/")).data
-    this.state.room = (await axios.get(BACKEND_URL + "room/")).data
-    this.state.task = (await axios.get(BACKEND_URL + "task/")).data
-
-    this.state.room.map((room, index) => {
-      console.log(room)
+    this.setState({
+      user :(await axios.get(BACKEND_URL + "profile/")).data,
+      room : (await axios.get(BACKEND_URL + "room/")).data,
+      task : (await axios.get(BACKEND_URL + "task/")).data,
+      loaded : true
     })
-
   }
   
   
-  buildList(room){
-    this.loadData()
-    let roomSize = room.length
+  buildList(){
+    let roomSize = this.state.room.length
     let userSize = this.state.user.length 
     let taskSize = this.state.task.length 
 
+    let room = this.state.room 
+    let user = this.state.user 
+    let task = this.state.task 
+
+
     const page = (
-      <Grid container spacing={8}>
-        {
-          (
-            <div>
-              There are {roomSize} many room 
-            </div>
-          )
-        }
+    <div>{
+        room.map((value, index) => (
+          <Paper className="paper">
+            <Grid container spacing={8}>
+              <Grid item xs={12}> 
+                {/* <Paper className="paper"> */}
+                  <Typography variant="title" component="h3">
+                    {value['name']}
+                  </Typography>
+                {/* </Paper> */}
+
+              </Grid>
+              <Grid item xs={6}>
+                  Janet
+              </Grid>
+
+              <Grid item xs={6}>
+                  <Button variant="contained" color="secondary"> Incomplete </Button>
+              </Grid>
+            </Grid>
+          </Paper>
+        ))
+      }
+    </div>
+    )
         {/* <Grid item xs={12}> 
             <Paper className="paper">
               <Typography variant="title" component="h3">
@@ -68,8 +86,6 @@ class LandingPage extends Component {
               <Button variant="contained" color="secondary"> Incomplete </Button>
             </Paper>
         </Grid> */}
-      </Grid>
-    )
 
     return page 
   }
@@ -80,14 +96,14 @@ class LandingPage extends Component {
   }
 
   render(){
-    const room = this.state.room
-
-
-    return(
-      <div className="landing">
-        {this.buildList(room)}
-      </div>
-    );
+      return(
+        <div className="landing">
+          {this.state.loaded === false ?
+            <div> Loading... </div>
+            :
+            this.buildList()}
+        </div>
+      );
   }
 }
 
