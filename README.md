@@ -12,11 +12,13 @@ Client
 1. Navigate to Client Folder
 2. `npm run install`
 
-Server
+Backend Server 
 1. Navigate to Backend Folder
-2. Update or Replace Environmental Variable 
-3. Install MySQL if haven't 
-
+2. `mkdir env` 
+3. `py -m venv env`
+4. `source env/bin/activate`
+5. `pip install -r requirements.txt`
+6. `py manage.py migrate`
 
 Run Guide
 --
@@ -26,12 +28,12 @@ Client
 
 Server
 1. Navigate to Backend Folder
-2. `py main.py`
+2. `py manage runserver`
 
 Built with
 --
-Front End - React.js and Material UI 
-Back End - Flask and Mysql 
+FrontEnd - React.js and Material UI 
+BackEnd - Flask and Postgresql
 
 Credits
 -- 

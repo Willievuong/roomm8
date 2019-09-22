@@ -1,4 +1,5 @@
 import time
+from datetime import datetime
 import requests
 
 # Living Room : 0
@@ -90,38 +91,45 @@ def create_user():
         r = requests.post(BACKEND_URL + "profile/", json=i)
         print(r)
 
+time = datetime.utcnow()
+time = str(time)
+
 task = [
     {
         "room_id": 5,
         "name": "Clean the living room",
-        "start_date": time.asctime( time.localtime(time.time()) ),
-        "end_date": time.asctime( time.localtime(time.time()) ),
+        "start_date": time,
+        "end_date": time,
         "user_id": 1,
-        "status": "Incompleted"
+        "status": "Incompleted",
+        "household_id": 1
     },
     {
         "room_id": 6,
         "name": "Clean the kitchen",
-        "start_date": time.asctime( time.localtime(time.time()) ),
-        "end_date": time.asctime( time.localtime(time.time()) ),
+        "start_date": time,
+        "end_date": time,
         "user_id": 2,
-        "status": "Incompleted"
+        "status": "Incompleted",
+        "household_id": 1
     },
     {
         "room_id": 7,
         "name": "Clean the hallway bathroom",
-        "start_date": time.asctime( time.localtime(time.time()) ),
-        "end_date": time.asctime( time.localtime(time.time()) ),
+        "start_date": time,
+        "end_date": time,
         "user_id": 3,
-        "status": "Incompleted"
+        "status": "Incompleted",
+        "household_id": 1
     },
     {
         "room_id": 8,
         "name": "Clean the corner bathroom",
-        "start_date": time.asctime( time.localtime(time.time()) ),
-        "end_date": time.asctime( time.localtime(time.time()) ),
+        "start_date": time,
+        "end_date": time,
         "user_id": 4,
-        "status": "Incompleted"
+        "status": "Incompleted",
+        "household_id": 1
     },
 ]
 
@@ -134,7 +142,7 @@ def create_task():
     print("CREATING TASK")
     for i in task: 
         r = requests.post(BACKEND_URL + "task/", json=i)
-        print(r)
+        print(r.text)
 
 
 household = [
@@ -154,4 +162,4 @@ def create_household():
         r = requests.post(BACKEND_URL + "household/", json=i)
         print(r)
 
-create_household()
+create_user()

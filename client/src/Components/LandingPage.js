@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import './css/landing.css'
 const axios = require('axios')
 
-const BACKEND_URL = "https://72605858.ngrok.io/"
+const BACKEND_URL = "https://localhost:8000/"
 
 class LandingPage extends Component { 
   constructor(props){
