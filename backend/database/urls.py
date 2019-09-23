@@ -12,5 +12,6 @@ urlpatterns = {
     url(r'^room/$', RoomCreateView, name="room"),
     url(r'^room/(?P<pk>[0-9]+)/$', RoomDetailsView, name="room_details"),
     url(r'^getUserHousehold/(?P<household_id>[0-9]+)/$', GetUserHousehold, name="UserHousehold"),
-    url(r'^getTaskHousehold/(?P<household_id>[0-9]+)/$', GetTaskHousehold, name="TaskHousehold")
+    url(r'^getTaskHousehold/(?P<household_id>[0-9]+)/$', GetTaskHousehold, name="TaskHousehold"),
+    url(r'^getRoomHousehold/(?P<household_id>[0-9]+)/$', GetRoomHousehold, name="RoomHousehold")
 }

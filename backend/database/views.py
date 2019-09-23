@@ -172,3 +172,17 @@ def GetTaskHousehold(request, household_id):
     
     serializer = TaskSerializer(queryset, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def GetRoomHousehold(request, household_id):
+    '''
+        Get The latest room from a household
+    '''
+    try: 
+        queryset = Room.objects.filter(household_id=household_id)
+    except queryset.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = RoomSerializer(queryset, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

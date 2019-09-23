@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import './css/landing.css'
 const axios = require('axios')
 
-const BACKEND_URL = "https://localhost:8000/"
+const BACKEND_URL = "http://localhost:8000/"
 
 class LandingPage extends Component { 
   constructor(props){
@@ -15,78 +15,101 @@ class LandingPage extends Component {
       user: {},
       room: {},
       task: {},
+      currentRoom: {},
       loaded: false
     }
   }
 
   async loadData(){
+    // TODO: Current values for HTTP GET request are hardcoded to be the first value, need to change later 
     this.setState({
-      user :(await axios.get(BACKEND_URL + "profile/")).data,
-      room : (await axios.get(BACKEND_URL + "room/")).data,
-      task : (await axios.get(BACKEND_URL + "task/")).data,
+      // household: (await axios.get(BACKEND_URL + "household/").data),
+      user :(await axios.get(BACKEND_URL + "getUserHousehold/1/")).data,
+      room : (await axios.get(BACKEND_URL + "getRoomHousehold/1/")).data,
+      task : (await axios.get(BACKEND_URL + "getTaskHousehold/1/")).data,
       loaded : true
     })
   }
   
+  findUser(user){
+    let userList = this.state.user
+    for(var i = 0; i < userList.length; i++){
+      if(userList[i]['id'] == user){
+        return userList[i]['nickname']
+      }
+    }
+
+    return "NO USER FOUND"
+  }
+
+  findRoom(task, room){
+    if(room['id'] == task['room_id']){
+      return this.findUser(task['user_id'])
+    }
+  }
   
+  findUserButton(user){
+    let userList = this.state.user
+    for(var i = 0; i < userList.length; i++){
+      if(userList[i]['id'] == user){
+        return (<Button variant="contained" color="secondary"> Incomplete </Button>)
+      }
+    }
+
+    return "NO USER FOUND"
+  }
+
+  findRoomButton(task, room){
+    if(room['id'] == task['room_id']){
+      return this.findUserButton(task['user_id'])
+    }
+  }
   buildList(){
     let roomSize = this.state.room.length
     let userSize = this.state.user.length 
     let taskSize = this.state.task.length 
 
-    let room = this.state.room 
+    let roomList = this.state.room 
     let user = this.state.user 
-    let task = this.state.task 
-
+    let taskList = this.state.task 
 
     const page = (
     <div>{
-        room.map((value, index) => (
+        roomList.map((room, index) => (
           <Paper className="paper">
             <Grid container spacing={8}>
               <Grid item xs={12}> 
-                {/* <Paper className="paper"> */}
                   <Typography variant="title" component="h3">
-                    {value['name']}
+                    {room['name']}
                   </Typography>
-                {/* </Paper> */}
-
               </Grid>
-              <Grid item xs={6}>
+
+              {taskList.map((task, index) => (
+                <Grid container xs={12}> 
+                  <Grid item xs={6}>
+                      {this.findRoom(task, room)}
+                  </Grid>
+    
+                  <Grid item xs={6}>
+                      {this.findRoomButton(task, room)}
+                  </Grid>
+                </Grid> 
+              ))
+              }
+
+              {/* <Grid item xs={6}>
                   Janet
               </Grid>
 
               <Grid item xs={6}>
                   <Button variant="contained" color="secondary"> Incomplete </Button>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Paper>
         ))
       }
     </div>
     )
-        {/* <Grid item xs={12}> 
-            <Paper className="paper">
-              <Typography variant="title" component="h3">
-                Kitchen 
-              </Typography>
-              <Typography component="p">
-                Paper can be used to build surface or other elements for your application.
-              </Typography>
-            </Paper>
-        </Grid>
-
-        <Grid item xs={6}>
-            <Paper className="paper"> 
-              Janet
-            </Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper className="paper"> 
-              <Button variant="contained" color="secondary"> Incomplete </Button>
-            </Paper>
-        </Grid> */}
-
     return page 
   }
 

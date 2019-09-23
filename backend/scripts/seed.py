@@ -96,38 +96,38 @@ time = str(time)
 
 task = [
     {
-        "room_id": 5,
+        "room_id": 9,
         "name": "Clean the living room",
         "start_date": time,
         "end_date": time,
-        "user_id": 1,
+        "user_id": 8,
         "status": "Incompleted",
         "household_id": 1
     },
     {
-        "room_id": 6,
+        "room_id": 10,
         "name": "Clean the kitchen",
         "start_date": time,
         "end_date": time,
-        "user_id": 2,
+        "user_id": 9,
         "status": "Incompleted",
         "household_id": 1
     },
     {
-        "room_id": 7,
+        "room_id": 11,
         "name": "Clean the hallway bathroom",
         "start_date": time,
         "end_date": time,
-        "user_id": 3,
+        "user_id": 10,
         "status": "Incompleted",
         "household_id": 1
     },
     {
-        "room_id": 8,
+        "room_id": 12,
         "name": "Clean the corner bathroom",
         "start_date": time,
         "end_date": time,
-        "user_id": 4,
+        "user_id": 11,
         "status": "Incompleted",
         "household_id": 1
     },
@@ -142,7 +142,7 @@ def create_task():
     print("CREATING TASK")
     for i in task: 
         r = requests.post(BACKEND_URL + "task/", json=i)
-        print(r.text)
+        print(r)
 
 
 household = [
@@ -162,4 +162,5 @@ def create_household():
         r = requests.post(BACKEND_URL + "household/", json=i)
         print(r)
 
-create_user()
+
+create_task()
