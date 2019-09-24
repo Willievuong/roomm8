@@ -19,6 +19,8 @@ Backend Server
 4. `source env/bin/activate`
 5. `pip install -r requirements.txt`
 6. `py manage.py migrate`
+7. Navigate to backend/scripts/
+8. `py seed.py`
 
 Run Guide
 --

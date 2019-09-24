@@ -162,5 +162,3 @@ def create_household():
         r = requests.post(BACKEND_URL + "household/", json=i)
         print(r)
 
-
-create_task()

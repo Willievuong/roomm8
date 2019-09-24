@@ -3,6 +3,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CustomizedDialogs from './Widgets/Dialog'
 import './css/landing.css'
 const axios = require('axios')
 
@@ -81,6 +83,7 @@ class LandingPage extends Component {
               <Grid item xs={12}> 
                   <Typography variant="title" component="h3">
                     {room['name']}
+                    <CustomizedDialogs/>
                   </Typography>
               </Grid>
 
@@ -122,7 +125,7 @@ class LandingPage extends Component {
       return(
         <div className="landing">
           {this.state.loaded === false ?
-            <div> Loading... </div>
+            <div>  <CircularProgress /> </div>
             :
             this.buildList()}
         </div>
