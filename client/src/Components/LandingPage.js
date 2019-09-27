@@ -54,7 +54,8 @@ class LandingPage extends Component {
     let userList = this.state.user
     for(var i = 0; i < userList.length; i++){
       if(userList[i]['id'] == user){
-        return (<Button variant="contained" color="secondary"> Incomplete </Button>)
+        // return (<Button variant="contained" color="secondary"> Incomplete </Button>)
+        return(<CustomizedDialogs/>)
       }
     }
 
@@ -83,7 +84,6 @@ class LandingPage extends Component {
               <Grid item xs={12}> 
                   <Typography variant="title" component="h3">
                     {room['name']}
-                    <CustomizedDialogs/>
                   </Typography>
               </Grid>
 
