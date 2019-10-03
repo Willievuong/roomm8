@@ -55,7 +55,7 @@ class LandingPage extends Component {
     for(var i = 0; i < userList.length; i++){
       if(userList[i]['id'] == user){
         // return (<Button variant="contained" color="secondary"> Incomplete </Button>)
-        return(<CustomizedDialogs/>)
+        return(<CustomizedDialogs userList={userList} user={user} />)
       }
     }
 

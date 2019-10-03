@@ -7,9 +7,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 
-export default function AlertDialog() {
+export default function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
-
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -17,6 +17,16 @@ export default function AlertDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const findUser = (user) => {
+    let userList = props.userList
+     
+    for(var i = 0; i < userList.length; i++){
+      if(userList[i]['id'] == user){
+        return userList[i]['nickname']
+      }
+    }
+  } 
 
   return (
     <div>
@@ -32,8 +42,7 @@ export default function AlertDialog() {
         <DialogTitle id="alert-dialog-title">{"Completed your task?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
+            {findUser(props.user)}
           </DialogContentText>
           <TextField
             id="standard-password-input"
@@ -45,8 +54,7 @@ export default function AlertDialog() {
         </DialogContent>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
+            Person Checking You
           </DialogContentText>
           <TextField
             id="standard-password-input"
