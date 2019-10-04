@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import SimpleSelect from './Select'
 
 export default function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
@@ -16,7 +17,9 @@ export default function AlertDialog(props) {
 
   const handleClose = () => {
     setOpen(false);
+  
   };
+
 
   const findUser = (user) => {
     let userList = props.userList
@@ -29,6 +32,7 @@ export default function AlertDialog(props) {
   } 
 
   return (
+    // Need To make all of this into a form
     <div>
       <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
         Incomplete
@@ -54,7 +58,7 @@ export default function AlertDialog(props) {
         </DialogContent>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Person Checking You
+            <SimpleSelect/>
           </DialogContentText>
           <TextField
             id="standard-password-input"
