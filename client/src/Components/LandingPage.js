@@ -24,11 +24,16 @@ class LandingPage extends Component {
 
   async loadData(){
     // TODO: Current values for HTTP GET request are hardcoded to be the first value, need to change later 
+    let room = await axios.get(BACKEND_URL + "getRoomHousehold/1/")
+    let task = await axios.get(BACKEND_URL + "getTaskHousehold/1/")
+    let user = await axios.get(BACKEND_URL + "getUserHousehold/1/")
+
+
     this.setState({
       // household: (await axios.get(BACKEND_URL + "household/").data),
-      user :(await axios.get(BACKEND_URL + "getUserHousehold/1/")).data,
-      room : (await axios.get(BACKEND_URL + "getRoomHousehold/1/")).data,
-      task : (await axios.get(BACKEND_URL + "getTaskHousehold/1/")).data,
+      user : user.data,
+      room : room.data,
+      task : task.data,
       loaded : true
     })
   }
@@ -36,6 +41,7 @@ class LandingPage extends Component {
   findUser(user){
     let userList = this.state.user
     for(var i = 0; i < userList.length; i++){
+      
       if(userList[i]['id'] == user){
         return userList[i]['nickname']
       }
@@ -54,7 +60,6 @@ class LandingPage extends Component {
     let userList = this.state.user
     for(var i = 0; i < userList.length; i++){
       if(userList[i]['id'] == user){
-        // return (<Button variant="contained" color="secondary"> Incomplete </Button>)
         return(<CustomizedDialogs userList={userList} user={user} />)
       }
     }
@@ -82,9 +87,9 @@ class LandingPage extends Component {
           <Paper className="paper">
             <Grid container spacing={8}>
               <Grid item xs={12}> 
-                  <Typography variant="title" component="h3">
+                  {/* <Typography variant="title" component="h3"> */}
                     {room['name']}
-                  </Typography>
+                  {/* </Typography> */}
               </Grid>
 
               {taskList.map((task, index) => (
@@ -99,14 +104,6 @@ class LandingPage extends Component {
                 </Grid> 
               ))
               }
-
-              {/* <Grid item xs={6}>
-                  Janet
-              </Grid>
-
-              <Grid item xs={6}>
-                  <Button variant="contained" color="secondary"> Incomplete </Button>
-              </Grid> */}
             </Grid>
           </Paper>
         ))
@@ -117,7 +114,7 @@ class LandingPage extends Component {
   }
 
 
-  componentDidMount(){
+  async componentDidMount(){
     this.loadData()
   }
 

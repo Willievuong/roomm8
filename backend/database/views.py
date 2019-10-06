@@ -155,6 +155,7 @@ def GetUserHousehold(request, household_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     serializer = ProfileSerializer(queryset, many=True)
+    print(serializer.data)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
     

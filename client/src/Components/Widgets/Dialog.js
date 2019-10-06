@@ -6,11 +6,20 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import SimpleSelect from './Select'
+import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
 
 export default function AlertDialog(props) {
+  const [values, setValues] = React.useState({
+    age: '',
+    name: 'hai',
+  });
   const [open, setOpen] = React.useState(false);
   
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -18,6 +27,13 @@ export default function AlertDialog(props) {
   const handleClose = () => {
     setOpen(false);
   
+  };
+
+  const handleChange = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
   };
 
 
@@ -30,6 +46,29 @@ export default function AlertDialog(props) {
       }
     }
   } 
+
+  const checkOffList = (user, oldUserList) => {
+    let userList = [] 
+    for(var i = 0; i < oldUserList.length; i++){
+      if(oldUserList[i]['id'] != user){
+        userList.push(oldUserList[i])
+      }
+    } 
+
+    console.log("PRINTING")
+    for(let i = 0; i < userList.length; i++){
+      console.log(userList[i]['nickname'])
+    }
+
+    // console.log(userList)
+    let menuItem = userList.map(user => (
+      <MenuItem key={user} value={user}>
+        {user['nickname']}
+      </MenuItem>
+    ))
+
+    return menuItem
+  }
 
   return (
     // Need To make all of this into a form
@@ -58,7 +97,21 @@ export default function AlertDialog(props) {
         </DialogContent>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <SimpleSelect/>
+          <form autoComplete="off">
+          <FormControl>
+            <InputLabel htmlFor="name-simple">Name</InputLabel>
+            <Select
+              value={values.age}
+              onChange={handleChange}
+              inputProps={{
+                name: 'name',
+                id: 'name-simple',
+              }}
+            >
+              {checkOffList(props.user, props.userList)}
+            </Select>
+          </FormControl>
+        </form>
           </DialogContentText>
           <TextField
             id="standard-password-input"
