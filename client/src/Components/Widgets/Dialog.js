@@ -14,8 +14,10 @@ import FormControl from '@material-ui/core/FormControl';
 
 export default function AlertDialog(props) {
   const [values, setValues] = React.useState({
-    age: '',
-    name: 'hai',
+    userId: props.user,
+    userPin: '',
+    checkUserId: '',
+    checkUserPin: '',
   });
   const [open, setOpen] = React.useState(false);
   
@@ -55,10 +57,10 @@ export default function AlertDialog(props) {
       }
     } 
 
-    console.log("PRINTING")
-    for(let i = 0; i < userList.length; i++){
-      console.log(userList[i]['nickname'])
-    }
+    // console.log("PRINTING")
+    // for(let i = 0; i < userList.length; i++){
+    //   console.log(userList[i]['nickname'])
+    // }
 
     // console.log(userList)
     let menuItem = userList.map(user => (
@@ -68,6 +70,12 @@ export default function AlertDialog(props) {
     ))
 
     return menuItem
+  }
+
+  const submit = () => {
+    console.log("SUBMITTING")
+    console.log(values.userId)
+    console.log(values.userPin)
   }
 
   return (
@@ -101,7 +109,7 @@ export default function AlertDialog(props) {
           <FormControl>
             <InputLabel htmlFor="name-simple">Name</InputLabel>
             <Select
-              value={values.age}
+              value={values.userId}
               onChange={handleChange}
               inputProps={{
                 name: 'name',
@@ -119,10 +127,12 @@ export default function AlertDialog(props) {
             type="password"
             autoComplete="current-password"
             margin="normal"
+            value={values.userPin}
+            onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={submit} color="primary" autoFocus>
             Submit
           </Button>
         </DialogActions>
