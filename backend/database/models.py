@@ -44,6 +44,6 @@ class Room(models.Model):
     name = models.TextField()
     household_id = models.TextField(null=True)
 
-    def __str(self):
+    def __str__(self):
         return "{}".format(self)
 

@@ -11,14 +11,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+const axios = require('axios')
+const BACKEND_URL = "http://localhost:8000/"
 
 export default function AlertDialog(props) {
-  const [values, setValues] = React.useState({
-    userId: props.user,
-    userPin: '',
-    checkUserId: '',
-    checkUserPin: '',
-  });
+  const [userId, setId] = React.useState(props.user)
+  const [userPin, setPin] = React.useState('')
+  const [checkUserId, setCheckId] = React.useState('')
+  const [checkUserPin, setCheckPin] = React.useState('')
   const [open, setOpen] = React.useState(false);
   
 
@@ -28,16 +28,7 @@ export default function AlertDialog(props) {
 
   const handleClose = () => {
     setOpen(false);
-  
   };
-
-  const handleChange = event => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
 
   const findUser = (user) => {
     let userList = props.userList
@@ -72,15 +63,27 @@ export default function AlertDialog(props) {
     return menuItem
   }
 
-  const submit = () => {
-    console.log("SUBMITTING")
-    console.log(values.userId)
-    console.log(values.userPin)
+  const submit = async () => {    
+    //Build JSON 
+    currentDate = new Date() 
+    let task_update  = {
+      "status": "complete", 
+      "end_date": currentDate,
+      "user_check_id": this.state.checkUserId 
+    }
+    let response = await axios.post(BACKEND_URL + "task/" + task['id'] + "/", task_update)
+    
+    // If response is good, change status to complete 
+
+    // If not good, prompt error 
+
+    setOpen(false);
   }
 
   return (
     // Need To make all of this into a form
     <div>
+      {/* Todo: Make this into a completed color */}
       <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
         Incomplete
       </Button>
@@ -101,6 +104,8 @@ export default function AlertDialog(props) {
             type="password"
             autoComplete="current-password"
             margin="normal"
+            value={userPin}
+            onChange={e => setPin(e.target.value)}
           />
         </DialogContent>
         <DialogContent>
@@ -109,8 +114,8 @@ export default function AlertDialog(props) {
           <FormControl>
             <InputLabel htmlFor="name-simple">Name</InputLabel>
             <Select
-              value={values.userId}
-              onChange={handleChange}
+              value={checkUserId}
+              onChange={e => setCheckId(e.target.value)}
               inputProps={{
                 name: 'name',
                 id: 'name-simple',
@@ -127,8 +132,8 @@ export default function AlertDialog(props) {
             type="password"
             autoComplete="current-password"
             margin="normal"
-            value={values.userPin}
-            onChange={handleChange}
+            value={checkUserPin}
+            onChange={e => setCheckPin(e.target.value)}
           />
         </DialogContent>
         <DialogActions>

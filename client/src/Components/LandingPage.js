@@ -56,11 +56,11 @@ class LandingPage extends Component {
     }
   }
   
-  findUserButton(user){
+  findUserButton(user, task){
     let userList = this.state.user
     for(var i = 0; i < userList.length; i++){
       if(userList[i]['id'] == user){
-        return(<CustomizedDialogs userList={userList} user={user} />)
+        return(<CustomizedDialogs userList={userList} user={user} task={task}/>)
       }
     }
 
@@ -69,7 +69,7 @@ class LandingPage extends Component {
 
   findRoomButton(task, room){
     if(room['id'] == task['room_id']){
-      return this.findUserButton(task['user_id'])
+      return this.findUserButton(task['user_id'], task)
     }
   }
   buildList(){
