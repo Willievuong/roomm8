@@ -8,7 +8,7 @@ import CustomizedDialogs from './Widgets/Dialog'
 import './css/landing.css'
 const axios = require('axios')
 
-const BACKEND_URL = "http://localhost:8000/"
+const BACKEND_URL = "https://fd80dcfb.ngrok.io/"
 
 class LandingPage extends Component { 
   constructor(props){

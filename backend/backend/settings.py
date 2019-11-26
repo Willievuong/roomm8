@@ -91,6 +91,7 @@ DATABASES = {
         'NAME': 'roomm8',
         'USER': 'postgres',
         'HOST': 'localhost',
+        'PASSWORD': 'postgres',
         'PORT': 5432
     }
 }

@@ -22,7 +22,7 @@ def HouseholdCreateView(request):
 def HouseholdDetailsView(request, pk):
     try:
         query = Household.objects.get(pk=pk)
-    except query.DoesNotExist:
+    except Household.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
@@ -56,7 +56,7 @@ def ProfileCreateView(request):
 def ProfileDetailsView(request, pk):
     try:
         query = Profile.objects.get(pk=pk)
-    except query.DoesNotExist:
+    except Profile.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
@@ -91,7 +91,7 @@ def TaskCreateView(request):
 def TaskDetailsView(request, pk):
     try:
         query = Task.objects.get(pk=pk)
-    except query.DoesNotExist:
+    except Task.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
@@ -126,7 +126,7 @@ def RoomCreateView(request):
 def RoomDetailsView(request, pk):
     try:
         query = Room.objects.get(pk=pk)
-    except query.DoesNotExist:
+    except Room.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
@@ -151,11 +151,11 @@ def GetUserHousehold(request, household_id):
     
     try: 
         queryset = Profile.objects.filter(household_id=household_id)
-    except queryset.DoesNotExist:
+    except Profile.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     serializer = ProfileSerializer(queryset, many=True)
-    print(serializer.data)
+    # print(serializer.data)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
     
@@ -168,7 +168,7 @@ def GetTaskHousehold(request, household_id):
     '''
     try: 
         queryset = Task.objects.filter(household_id=household_id)
-    except queryset.DoesNotExist:
+    except Task.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
     serializer = TaskSerializer(queryset, many=True)
@@ -182,8 +182,37 @@ def GetRoomHousehold(request, household_id):
     '''
     try: 
         queryset = Room.objects.filter(household_id=household_id)
-    except queryset.DoesNotExist:
+    except Room.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
     serializer = RoomSerializer(queryset, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def PinCheck(request):
+    '''
+        Checking ther pin
+
+    '''
+
+    user_id = request.data['user_id']
+    user_pin = request.data['userPin']
+    user_check_id = request.data['user_check_id']
+    user_check_pin = request.data['checkUserPin']
+    try: 
+        user_query = Profile.objects.get(id=user_id)
+    except Profile.DoesNotExist: 
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    try: 
+        user_check_query = Profile.objects.get(id=user_check_id)
+    except Profile.DoesNotExist: 
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    user = ProfileSerializer(user_query)
+    user_check = ProfileSerializer(user_check_id)
+
+    if user['pin'] == user_pin and user_check['pin'] == user_check_pin: 
+        return Response(status=status.HTTP_200_OK)
+    else: 
+        return Response(status=status.HTTP_400_BAD_REQUEST)

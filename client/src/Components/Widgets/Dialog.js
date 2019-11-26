@@ -12,7 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 const axios = require('axios')
-const BACKEND_URL = "http://localhost:8000/"
+const BACKEND_URL = "https://fd80dcfb.ngrok.io/"
 
 export default function AlertDialog(props) {
   const [userId, setId] = React.useState(props.user)
@@ -65,17 +65,26 @@ export default function AlertDialog(props) {
 
   const submit = async () => {    
     //Build JSON 
-    currentDate = new Date() 
-    let task_update  = {
-      "status": "complete", 
-      "end_date": currentDate,
-      "user_check_id": this.state.checkUserId 
-    }
-    let response = await axios.post(BACKEND_URL + "task/" + task['id'] + "/", task_update)
+    let currentDate = new Date() 
+    let task = props.task
+    task["status"] = "complete"
+    task["end_date"] = currentDate
+    task["user_check_id"] = checkUserId['id'] 
+    
+
+    // Check PIN
+    
+
+
+    let response = await axios.put(BACKEND_URL + "task/" + task['id'] + "/", task)
     
     // If response is good, change status to complete 
-
+    if(response.status === 200){
+      console.log("Update Task Success")
+    }else{ 
     // If not good, prompt error 
+      console.error(response.data)
+    }
 
     setOpen(false);
   }
