@@ -43,41 +43,49 @@ user = [
         "first_name": "Janet",
         "last_name": "He",
         "nickname": "Janet",
-        'household_id': 1
+        "household_id": 1,
+        "pin": 1234,
+        
     }, 
     {   "first_name": "Mohammed",
         "last_name": "Ameen",
         "nickname": "Mo",
-        'household_id': 1
+        "household_id": 1,
+        "pin": 1234,
     },
     {
         "first_name": "William",
         "last_name": "Vuong",
         "nickname": "Will",
-        'household_id': 1
+        "household_id": 1,
+        "pin": 1234,
     },
     {
         "first_name": "Aishwarya",
         "last_name": "Niraula",
         "nickname": "Aishwarya",
-        'household_id': 1
+        "household_id": 1,
+        "pin": 1234,
     },
     {
         "first_name": "Humberto",
         "last_name": "Madueno",
         "nickname": "Berto",
-        'household_id': 1
+        "household_id": 1,
+        "pin": 1234,
     },
     {
         "first_name": "Sammuel",
         "last_name": "Ayala",
         "nickname": "Sammy",
-        'household_id': 1
+        "household_id": 1,
+        "pin": 1234,
     },
     {   "first_name": "Fermin",
         "last_name": "Vargas",
         "nickname": "Fermin",
-        'household_id': 1
+        "household_id": 1,
+        "pin": 1234,
     }
 ]
 

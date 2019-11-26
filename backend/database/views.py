@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializer import ProfileSerializer, TaskSerializer, RoomSerializer, HouseholdSerializer
 from .models import Profile, Task, Room, Household
+import json
 
 @api_view(['GET', 'POST'])
 def HouseholdCreateView(request):
@@ -199,6 +200,9 @@ def PinCheck(request):
     user_pin = request.data['userPin']
     user_check_id = request.data['user_check_id']
     user_check_pin = request.data['checkUserPin']
+
+    print(user_check_id)
+
     try: 
         user_query = Profile.objects.get(id=user_id)
     except Profile.DoesNotExist: 
@@ -209,8 +213,8 @@ def PinCheck(request):
     except Profile.DoesNotExist: 
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    user = ProfileSerializer(user_query)
-    user_check = ProfileSerializer(user_check_id)
+    user = (ProfileSerializer(user_query)).data
+    user_check = (ProfileSerializer(user_check_query)).data
 
     if user['pin'] == user_pin and user_check['pin'] == user_check_pin: 
         return Response(status=status.HTTP_200_OK)
