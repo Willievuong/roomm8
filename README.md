@@ -6,6 +6,10 @@ Progress
 --
 [Scrum Board](https://trello.com/b/FaETswJe/roomm8)
 
+Build Status
+--
+[![Build Status](https://travis-ci.org/Willievuong/roomm8.svg?branch=master)](https://travis-ci.org/Willievuong/roomm8)
+
 Installation Guide
 --
 Client
