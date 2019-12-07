@@ -1,8 +1,18 @@
-language: node_js
-node_js:
-  - "node"
-install:
-  - cd client
-  - npm install
-script:
-  - npm test
+matrix:
+  include:
+
+  - language: python
+    before_script:
+      - cd backend/
+      - pip install -r requirements.txt
+    script:
+      - python3 manage.py test
+
+  - language: node_js
+    node_js:
+      - "node"
+    install:
+      - cd client/
+      - npm install
+    script:
+      - npm test
