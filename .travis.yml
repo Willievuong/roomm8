@@ -2,6 +2,8 @@ matrix:
   include:
 
   - language: python
+    services:
+      - postgresql
     before_script:
       - cd backend/
       - pip install -r requirements.txt
