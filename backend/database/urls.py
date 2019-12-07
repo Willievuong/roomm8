@@ -16,3 +16,5 @@ urlpatterns = {
     url(r'^getRoomHousehold/(?P<household_id>[0-9]+)/$', GetRoomHousehold, name="RoomHousehold"),
     url(r'^pinCheck/$', PinCheck, name="PinCheck")
 }
+
+urlpatterns = format_suffix_patterns(urlpatterns)
