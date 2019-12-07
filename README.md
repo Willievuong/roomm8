@@ -13,27 +13,27 @@ Build Status
 Installation Guide
 --
 Client
-1. Navigate to Client Folder
+1. `cd client/`
 2. `npm run install`
 
 Backend Server 
-1. Navigate to Backend Folder
+1. `cd backend/`
 2. `mkdir env` 
 3. `py -m venv env`
 4. `source env/bin/activate`
 5. `pip install -r requirements.txt`
 6. `py manage.py migrate`
-7. Navigate to backend/scripts/
+7. `cd backend/scripts/`
 8. `py seed.py`
 
 Run Guide
 --
 Client
-1. Navigate to Client Folder 
+1. `cd client/` 
 2. `npm run`
 
 Server
-1. Navigate to Backend Folder
+1. `cd backend/`
 2. `py manage runserver`
 
 Built with

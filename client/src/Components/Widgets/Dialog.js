@@ -11,8 +11,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import { BACKEND_URL } from '../../util/config'
 const axios = require('axios')
-const BACKEND_URL = "https://b570ed98.ngrok.io/"
+
+const INCOMPLETE = 'Incompleted'
 
 export default function AlertDialog(props) {
   const [userId, setId] = React.useState(props.user)
@@ -20,6 +22,7 @@ export default function AlertDialog(props) {
   const [checkUserId, setCheckId] = React.useState('')
   const [checkUserPin, setCheckPin] = React.useState('')
   const [open, setOpen] = React.useState(false);
+  const [task, setTask] = React.useState(props.task)
   
 
   const handleClickOpen = () => {
@@ -78,88 +81,102 @@ export default function AlertDialog(props) {
     let response = await axios.post(BACKEND_URL + "pinCheck/", task)
 
     if(response.status === 200){
-      console.log("Update Task Success")
-    }else{ 
-    // If not good, prompt error 
-      console.error(response.data)
-    }
-
-
-    response = await axios.put(BACKEND_URL + "task/" + task['id'] + "/", task)
+      console.log("Checking Pin is successful")
+      response = await axios.put(BACKEND_URL + "task/" + task['id'] + "/", task)
     
-    // If response is good, change status to complete 
-    if(response.status === 200){
-      console.log("Update Task Success")
+      // If response is good, change status to complete 
+      if(response.status === 200){
+        console.log("Update Task Success")
+      }else{ 
+      // If not good, prompt error 
+        console.error(response.data)
+      }
     }else{ 
-    // If not good, prompt error 
+    // If not good, prompt error
       console.error(response.data)
     }
+
+
+
 
     setOpen(false);
   }
 
+ 
   return (
     // Need To make all of this into a form
-    <div>
-      {/* Todo: Make this into a completed color */}
-      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-        Incomplete
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Completed your task?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {findUser(props.user)}
-          </DialogContentText>
-          <TextField
-            id="standard-password-input"
-            label="Pin"
-            type="password"
-            autoComplete="current-password"
-            margin="normal"
-            value={userPin}
-            onChange={e => setPin(e.target.value)}
-          />
-        </DialogContent>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-          <form autoComplete="off">
-          <FormControl>
-            <InputLabel htmlFor="name-simple">Name</InputLabel>
-            <Select
-              value={checkUserId}
-              onChange={e => setCheckId(e.target.value)}
-              inputProps={{
-                name: 'name',
-                id: 'name-simple',
-              }}
-            >
-              {checkOffList(props.user, props.userList)}
-            </Select>
-          </FormControl>
-        </form>
-          </DialogContentText>
-          <TextField
-            id="standard-password-input"
-            label="Pin"
-            type="password"
-            autoComplete="current-password"
-            margin="normal"
-            value={checkUserPin}
-            onChange={e => setCheckPin(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={submit} color="primary" autoFocus>
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <div>
+      { task['status'] !== INCOMPLETE ?
+      <div> 
+        <Button variant="outlined" color="primary">
+          {task['status']}
+          {console.log(task['status'])}
+        </Button>
+      </div> :
+        <div>
+        <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+          Incomplete
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Completed your task?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              {findUser(props.user)}
+            </DialogContentText>
+            <TextField
+              id="standard-password-input"
+              label="Pin"
+              type="password"
+              autoComplete="current-password"
+              inputMode='numeric'
+              margin="normal"
+              value={userPin}
+              onChange={e => setPin(e.target.value)}
+            />
+          </DialogContent>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+            <form autoComplete="off">
+            <FormControl>
+              <InputLabel htmlFor="name-simple">Name</InputLabel>
+              <Select
+                value={checkUserId}
+                onChange={e => setCheckId(e.target.value)}
+                inputProps={{
+                  name: 'name',
+                  id: 'name-simple',
+                }}
+              >
+                {checkOffList(props.user, props.userList)}
+              </Select>
+            </FormControl>
+          </form>
+            </DialogContentText>
+            <TextField
+              id="standard-password-input"
+              label="Pin"
+              type="password"
+              autoComplete="current-password"
+              inputMode='numeric'
+              margin="normal"
+              value={checkUserPin}
+              onChange={e => setCheckPin(e.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={submit} color="primary" autoFocus>
+              Submit
+            </Button>
+          </DialogActions>
+        </Dialog>
+        </div>
+      }
     </div>
+    
   );
 }

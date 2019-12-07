@@ -65,3 +65,5 @@ def clear_household():
 
         r = requests.delete(BACKEND_URL + 'household/' + str(house_id) + '/')
         print(r)
+
+clear_task()

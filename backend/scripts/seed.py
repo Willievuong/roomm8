@@ -171,7 +171,7 @@ def create_household():
         print(r)
 
 
-create_household()
-create_room()
+# create_household()
+# create_room()
 create_task()
-create_user()
+# create_user()

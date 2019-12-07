@@ -6,9 +6,8 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CustomizedDialogs from './Widgets/Dialog'
 import './css/landing.css'
+import { BACKEND_URL } from '../util/config'
 const axios = require('axios')
-
-const BACKEND_URL = "https://b570ed98.ngrok.io/"
 
 class LandingPage extends Component { 
   constructor(props){
