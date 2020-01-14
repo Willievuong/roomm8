@@ -8,6 +8,23 @@ import json
 
 @api_view(['GET', 'POST'])
 def HouseholdCreateView(request):
+    '''
+        The route for 
+            GET: household class for obtaining all instances of household
+            POST: creating a new household instance
+
+        Args: 
+            POST: The object to be created 
+
+        Return:
+            HTTP 200: An list of all instance of household
+                 201: A new household object was created
+                 400: Error in creating the new object
+
+        Raises: 
+            None
+    '''
+
     if request.method == 'GET':
         queryset = Household.objects.all()
         serializer = HouseholdSerializer(queryset, many=True)
@@ -21,6 +38,22 @@ def HouseholdCreateView(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def HouseholdDetailsView(request, pk):
+    '''
+        The route for
+            GET: querying the object with the unique identifier 
+            PUT: querying for the object, and updating it with new fields given in the body
+            DELETE: deleting the object with the queried id 
+
+        Args:
+            pk (int): The unique identifier used to identify the object
+
+        Return: 
+            GET: The object with the corresponding primary key
+            PUT: The newly updated object with the corresponding primary key
+            DELETE: 204 status code for successful delete
+        Raises: 
+            None
+    '''
     try:
         query = Household.objects.get(pk=pk)
     except Household.DoesNotExist:
@@ -42,6 +75,22 @@ def HouseholdDetailsView(request, pk):
 
 @api_view(['GET', 'POST'])
 def ProfileCreateView(request):
+    '''
+        The route for 
+            GET: profile class for obtaining all instances of profile
+            POST: creating a new profile instance
+
+        Args: 
+            POST: The object to be created 
+
+        Return:
+            HTTP 200: An list of all instance of profile
+                 201: A new profile object was created
+                 400: Error in creating the new object
+
+        Raises: 
+            None
+    '''
     if request.method == 'GET':
         queryset = Profile.objects.all()
         serializer = ProfileSerializer(queryset, many=True)
@@ -55,6 +104,22 @@ def ProfileCreateView(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def ProfileDetailsView(request, pk):
+    '''
+        The route for
+            GET: querying the object with the unique identifier 
+            PUT: querying for the object, and updating it with new fields given in the body
+            DELETE: deleting the object with the queried id 
+
+        Args:
+            pk (int): The unique identifier used to identify the object
+
+        Return: 
+            GET: The object with the corresponding primary key
+            PUT: The newly updated object with the corresponding primary key
+            DELETE: 204 status code for successful delete
+        Raises: 
+            None
+    '''
     try:
         query = Profile.objects.get(pk=pk)
     except Profile.DoesNotExist:
@@ -73,9 +138,24 @@ def ProfileDetailsView(request, pk):
         query.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-#------
 @api_view(['GET', 'POST'])
 def TaskCreateView(request):
+    '''
+        The route for 
+            GET: Task class for obtaining all instances of task
+            POST: creating a new task instance
+
+        Args: 
+            POST: The object to be created 
+
+        Return:
+            HTTP 200: An list of all instance of task
+                 201: A new task object was created
+                 400: Error in creating the new object
+
+        Raises: 
+            None
+    '''
     if request.method == 'GET':
         queryset = Task.objects.all()
         serializer = TaskSerializer(queryset, many=True)
@@ -90,6 +170,22 @@ def TaskCreateView(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def TaskDetailsView(request, pk):
+    '''
+        The route for
+            GET: querying the object with the unique identifier 
+            PUT: querying for the object, and updating it with new fields given in the body
+            DELETE: deleting the object with the queried id 
+
+        Args:
+            pk (int): The unique identifier used to identify the object
+
+        Return: 
+            GET: The object with the corresponding primary key
+            PUT: The newly updated object with the corresponding primary key
+            DELETE: 204 status code for successful delete
+        Raises: 
+            None
+    '''
     try:
         query = Task.objects.get(pk=pk)
     except Task.DoesNotExist:
@@ -108,9 +204,25 @@ def TaskDetailsView(request, pk):
         query.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-#--
+
 @api_view(['GET', 'POST'])
 def RoomCreateView(request):
+    '''
+        The route for 
+            GET: Room class for obtaining all instances of Room
+            POST: creating a new Room instance
+
+        Args: 
+            POST: The object to be created 
+
+        Return:
+            HTTP 200: An list of all instance of Room
+                 201: A new Room object was created
+                 400: Error in creating the new object
+
+        Raises: 
+            None
+    ''' 
     if request.method == 'GET':
         queryset = Room.objects.all()
         serializer = RoomSerializer(queryset, many=True)
@@ -122,9 +234,25 @@ def RoomCreateView(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# CustomUser 
+
 @api_view(['GET', 'PUT', 'DELETE'])
 def RoomDetailsView(request, pk):
+    '''
+        The route for
+            GET: querying the object with the unique identifier 
+            PUT: querying for the object, and updating it with new fields given in the body
+            DELETE: deleting the object with the queried id 
+
+        Args:
+            pk (int): The unique identifier used to identify the object
+
+        Return: 
+            GET: The object with the corresponding primary key
+            PUT: The newly updated object with the corresponding primary key
+            DELETE: 204 status code for successful delete
+        Raises: 
+            None
+    '''
     try:
         query = Room.objects.get(pk=pk)
     except Room.DoesNotExist:
@@ -159,7 +287,6 @@ def GetUserHousehold(request, household_id):
     # print(serializer.data)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-    
 
 @api_view(['GET'])
 def GetTaskHousehold(request, household_id):

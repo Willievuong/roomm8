@@ -54,12 +54,13 @@ class LandingPage extends Component {
       return this.findUser(task['user_id'])
     }
   }
+
   
   findUserButton(user, task){
     let userList = this.state.user
     for(var i = 0; i < userList.length; i++){
       if(userList[i]['id'] == user){
-        return(<CustomizedDialogs userList={userList} user={user} task={task}/>)
+        return(<CustomizedDialogs onChange={this.handleSubmission.bind(this)} userList={userList} user={user} task={task}/>)
       }
     }
 
