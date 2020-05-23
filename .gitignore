@@ -12,6 +12,7 @@ bin/
 
 # testing
 /coverage
+.coverage
 
 # production
 /build

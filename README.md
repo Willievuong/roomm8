@@ -9,6 +9,7 @@ Progress
 Build Status
 --
 [![Build Status](https://travis-ci.org/Willievuong/roomm8.svg?branch=master)](https://travis-ci.org/Willievuong/roomm8)
+[![Coverage Status](https://coveralls.io/repos/github/Willievuong/roomm8/badge.svg?branch=master)](https://coveralls.io/github/Willievuong/roomm8?branch=master)
 
 Installation Guide
 --
